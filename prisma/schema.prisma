@@ -1,0 +1,18 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Paste {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  content      String
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime?
+  maxViews     Int?
+  currentViews Int      @default(0)
+}
